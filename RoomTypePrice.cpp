@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <strstream>
 #include "RoomTypePrice.h"
 using namespace std;
 
@@ -18,10 +17,11 @@ istream & operator >> (istream &in, RoomTypeInfo &obj) {
 }
 void RoomTypePrice::showRoomTypePrice() {
 	syncReadRoomTypePrice();
-	map<int, RoomTypeInfo>::iterator it;
+	map<string, RoomTypeInfo>::iterator it;
 	cout << "序号\t房间类型\t床位数\t每晚价格" << endl;
-	for (it = RoomTypePrice::mpRoomType.begin(); it != RoomTypePrice::mpRoomType.end(); ++it) {
-		cout << it->first << "\t" << it->second << endl;
+	int index = 1;
+	for (it = RoomTypePrice::mpRoomType.begin(); it != RoomTypePrice::mpRoomType.end(); ++it, ++index) {
+		cout << index << "\t" << it->second << endl;
 	}
 }
 
@@ -46,10 +46,8 @@ void RoomTypePrice::syncReadRoomTypePrice() {
 //		++index;
 //	}
 	RoomTypeInfo line;
-	int index = 1;
 	while(file >> line) {
-		RoomTypePrice::mpRoomType[index] = line;
-		++index;
+		RoomTypePrice::mpRoomType[line.typeName] = line;
 	}
 	file.close();
 }

@@ -1,19 +1,26 @@
 #include "View.h"
 #include <map>
 #include "MemberDiscount.h"
-#include "RoomTypePrice.h"
-
+#include "Room.h"
 #include <iostream>
 #include <fstream>
 using namespace std;
 map<string, double> MemberDiscount::mpDiscount;
-map<int, RoomTypeInfo> RoomTypePrice::mpRoomType;
+map<string, RoomTypeInfo> RoomTypePrice::mpRoomType;
+map<string, RoomInfo> Room::mpRoom;
 int main() {
-	ofstream file;
-	file.open("RoomTypePrice.dat", ios::out);
-	file << "豪华套房 4 400" << endl;
-	file << "标准客房 2 200" << endl;
-	file << "普通客房 1 100" << endl;
+	RoomTypePrice::syncReadRoomTypePrice();
+//	ofstream file;
+//	file.open("Room.dat", ios::out);
+//	file << "101 普通客房 空房" << endl;
+//	file << "202 标准客房 已预订" << endl;
+//	file << "303 普通客房 已入住" << endl;
+
+//	ofstream file;
+//	file.open("RoomTypePrice.dat", ios::out);
+//	file << "豪华套房 4 400" << endl;
+//	file << "标准客房 2 200" << endl;
+//	file << "普通客房 1 100" << endl;
 
 //	ofstream file;
 //	file.open("memberDiscount.dat", ios::out);

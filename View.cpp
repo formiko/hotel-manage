@@ -2,9 +2,8 @@
 #include <fstream>
 #include <string>
 #include "View.h"
-#include "Look.h"
 #include "MemberDiscount.h"
-#include "RoomTypePrice.h"
+#include "Room.h"
 using namespace std;
 
 
@@ -245,7 +244,8 @@ void View::viewLookRoom(string who) {
 	cin >> sel;
 	switch(sel) {
 		case 1:
-			Look::lookAllRoom();
+			Room::showRoom();
+			break;
 		default:
 			if("admin" == who) {
 				viewAdminIndex();
