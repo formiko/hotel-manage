@@ -28,7 +28,6 @@ class View {
 		void viewCustomerLogin();
 		void viewCustomer();
 		void viewIndex();
-
 		void run() {
 			viewIndex();
 		}

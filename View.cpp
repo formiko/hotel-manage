@@ -143,6 +143,9 @@ void View::viewCustomerRegister() {
 	puts("你的密码是：");
 	cout << password << endl;
 	puts("自动登录成功");
+	puts("输入任意值按回车到顾客首页");
+	string temp;
+	cin >> temp;
 	viewCustomerIndex();
 }
 
@@ -257,10 +260,10 @@ void View::viewShowContinueInDiscount() {
 	puts("0. 返回上一级（默认）");
 	int sel;
 	cin >> sel;
-	switch(sel) {
+	switch (sel) {
 		default:
 			viewManageContinueInDiscount();
-			
+
 	}
 }
 

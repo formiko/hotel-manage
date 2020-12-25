@@ -40,11 +40,11 @@ void Room::bookRoom(string roomId, string username, int stayPeriod) {
 	Room::mpRoom[roomId].roomStatus = "ÒÑÔ¤¶©";
 	Room::mpRoom[roomId].whoInRoom = username;
 	Room::mpRoom[roomId].stayPeriod = stayPeriod;
-	puts("********************");
-	cout << RoomTypePrice::mpRoomType[Room::mpRoom[roomId].typeName].pricePerNight << endl;
-	cout <<	MemberDiscount::mpDiscount[Customer::mpCustomer[username].customerStatus] << endl;
-	cout <<	ContinueDiscount::workDiscount(stayPeriod) << endl;
-	puts("********************");
+//	puts("********************");
+//	cout << RoomTypePrice::mpRoomType[Room::mpRoom[roomId].typeName].pricePerNight << endl;
+//	cout <<	MemberDiscount::mpDiscount[Customer::mpCustomer[username].customerStatus] << endl;
+//	cout <<	ContinueDiscount::workDiscount(stayPeriod) << endl;
+//	puts("********************");
 
 	Room::mpRoom[roomId].needPay = (double)stayPeriod
 	                               * RoomTypePrice::mpRoomType[Room::mpRoom[roomId].typeName].pricePerNight

@@ -34,11 +34,17 @@ int main() {
 //	file << "efemero 普通会员 菜狗菜 男 1234554321" << endl;
 //	file << "oremefe 非会员 狗菜狗 女 5432112345" << endl;
 
-//	ofstream file;
-//	file.open("Room.dat", ios::out);
-//	file << "101 普通客房 空房 无  0 0" << endl;
-//	file << "202 标准客房 已预订 formiko 0 0" << endl;
-//	file << "303 普通客房 已入住 okimrof 0 0" << endl;
+	ofstream file;
+	file.open("Room.dat", ios::out);
+	file << "101 豪华套房 空房 无  0 0" << endl;
+	file << "102 普通客房 空房 无  0 0" << endl;
+	file << "103 标准客房 空房 无  0 0" << endl;
+	file << "201 普通客房 空房 无  0 0" << endl;
+	file << "202 普通客房 空房 无  0 0" << endl;
+	file << "203 标准客房 空房 无  0 0" << endl;
+	file << "301 豪华套房 空房 无 0 0" << endl;
+	file << "302 豪华套房 空房 无 0 0" << endl;
+	file << "303 豪华套房 空房 无 0 0" << endl;
 
 //	ofstream file;
 //	file.open("RoomTypePrice.dat", ios::out);
