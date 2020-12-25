@@ -19,8 +19,9 @@ class RoomTypeInfo {
 };
 
 class RoomTypePrice {
-		static map<string, RoomTypeInfo> mpRoomType;
+		
 	public:
+		static map<string, RoomTypeInfo> mpRoomType;
 		static void showRoomTypePrice();
 		static void setRoomTypePrice(int index, RoomTypeInfo);
 		static void syncReadRoomTypePrice();

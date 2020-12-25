@@ -3,6 +3,7 @@ using namespace std;
 
 class Identity {
 	public:
+		static string nowUsername;
 		static bool isUsernameExisted(string username);
 		static void registerCustomer(string username, string password);
 		static bool customerLogin(string username, string password);

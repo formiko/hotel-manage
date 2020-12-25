@@ -6,14 +6,36 @@
 #include "Room.h"
 using namespace std;
 
+void View::viewCustomerFindAllEmptyRoom() {
+	Room::showEmptyRoom();
+	puts("1. 预订客房");
+	puts("0. 取消（默认）");
+	int sel;
+	cin >> sel;
+	switch(sel) {
+		case 1:
+			viewCustomerBookRoom();
+			break;
+		default:
+			viewCustomerIndex();
+	}
+}
 
 void View::viewCustomerFindRoom() {
 	system("cls");
 	puts("1. 查询所有空房");
-	puts("2. 按房间号查询空房");
-	puts("3. 按楼层查询空房");
+//	puts("2. 按房间号查询空房");
+//	puts("3. 按楼层查询空房");
+	puts("0. 取消（默认）");
 	int sel;
 	cin >> sel;
+	switch(sel) {
+		case 1:
+			viewCustomerFindAllEmptyRoom();
+			break;
+		default:
+			viewCustomerIndex();
+	}
 }
 
 void View::viewIndex() {
@@ -123,6 +145,45 @@ void View::viewCustomerRegister() {
 	viewCustomerIndex();
 }
 
+void View::viewCustomerBookRoom() {
+	puts("请输入你想要预订的房间的房间号");
+	string roomId;
+	cin >> roomId;
+	puts("请输入入住时长");
+	int stayPeriod;
+	cin >> stayPeriod;
+	cout << "你的username是 " << Identity::nowUsername << endl;
+	Room::bookRoom(roomId, Identity::nowUsername, stayPeriod);
+	puts("预订成功！");
+	Room::showCustomerBookedRoom(Identity::nowUsername);
+	puts("1. 取消预订");
+	puts("0. 返回顾客首页（默认）");
+	int sel;
+	cin >> sel;
+	switch(sel) {
+		case 1:
+			viewCustomerCancelBook();
+			break;
+		default:
+			viewCustomerIndex();
+	}
+}
+void View::viewCustomerCancelBook() {
+	puts("以下是你的预订");
+	Room::showCustomerBookedRoom(Identity::nowUsername);
+	puts("1. 取消预订");
+	puts("0. 返回（默认）");
+	int sel;
+	cin >> sel;
+	switch(sel) {
+		case 1:
+			Room::CustomerCancelBook(Identity::nowUsername);
+			viewCustomerIndex();
+			break;
+		default:
+			viewCustomerIndex();
+	}
+}
 void View::viewCustomerIndex() {
 	system("cls");
 	puts("1. 查找客房");
@@ -136,8 +197,10 @@ void View::viewCustomerIndex() {
 			viewCustomerFindRoom();
 			break;
 		case 2:
+			viewCustomerBookRoom();
 			break;
 		case 3:
+			viewCustomerCancelBook();
 			break;
 		case 4:
 			break;
@@ -232,6 +295,17 @@ void View::viewAdminIndex() {
 			viewIndex();
 	}
 }
+void View::viewShowAllRoom(string who) {
+	Room::showRoom();
+	puts("0. 查看客房信息（默认）");
+	int sel;
+	cin >> sel;
+	switch(sel) {
+		case 0:
+		default:
+			viewLookRoom(who);
+	}
+}
 void View::viewLookRoom(string who) {
 	puts("1. 查看全部房间信息");
 	puts("2. 查看空房信息");
@@ -244,7 +318,7 @@ void View::viewLookRoom(string who) {
 	cin >> sel;
 	switch(sel) {
 		case 1:
-			Room::showRoom();
+			viewShowAllRoom(who);
 			break;
 		default:
 			if("admin" == who) {

@@ -5,6 +5,7 @@
 
 class View {
 	public:
+		void viewShowAllRoom(string who);
 		void viewSetRoomTypePrice();
 		void viewManageSteadyInDiscount();
 		void viewSetMemberDiscount();
@@ -15,7 +16,10 @@ class View {
 		void viewAdminLookRoom();
 		void viewAdminIndex();
 		void viewAdminLogin();
+		void viewCustomerCancelBook();
+		void viewCustomerFindAllEmptyRoom();
 		void viewCustomerFindRoom();
+		void viewCustomerBookRoom();
 		void viewCustomerIndex();
 		void viewCustomerRegister();
 		void viewCustomerLogin();

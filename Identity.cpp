@@ -54,6 +54,7 @@ bool Identity::customerLogin(string username, string password) {
 			if (!is_customer) {
 				return false;
 			} else {
+				Identity::nowUsername = username;
 				return true;
 			}
 		}
