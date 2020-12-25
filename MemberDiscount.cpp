@@ -50,7 +50,7 @@ void MemberDiscount::showDiscount() {
 	
 	syncReadDiscount();
 	map<string, double>::iterator it;
-	cout << "会员类型\t折扣比率" << endl;
+	cout << "序号\t会员类型\t折扣比率" << endl;
 	int index = 1;
 	for(it = MemberDiscount::mpDiscount.begin(); it != MemberDiscount::mpDiscount.end(); ++it, ++index) {
 		cout << index << "\t" << it->first << "\t" << it->second << endl;

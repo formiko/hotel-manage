@@ -5,6 +5,7 @@
 
 class View {
 	public:
+		void viewSetRoomTypePrice();
 		void viewManageSteadyInDiscount();
 		void viewSetMemberDiscount();
 		void viewSetDiscount();

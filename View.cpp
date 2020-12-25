@@ -4,6 +4,7 @@
 #include "View.h"
 #include "Look.h"
 #include "MemberDiscount.h"
+#include "RoomTypePrice.h"
 using namespace std;
 
 
@@ -202,11 +203,17 @@ void View::viewSetDiscount() {
 			viewAdminIndex();
 	}
 }
+void View::viewSetRoomTypePrice() {
+	RoomTypePrice::showRoomTypePrice();
+	
+}
 void View::viewAdminIndex() {
 	system("cls");
 	puts("1. 查看客房");
-	puts("2. 设置客房价格");
-	puts("3. 设置优惠政策");
+	puts("2. 增加房间");
+	puts("3. 删除房间");
+	puts("4. 设置指定客房类型价格");
+	puts("5. 设置优惠政策");
 	puts("0. 重新选择身份（默认）");
 	int sel;
 	cin >> sel;
@@ -216,10 +223,11 @@ void View::viewAdminIndex() {
 			break;
 		case 2:
 			break;
-		case 3:
+		case 5:
 			viewSetDiscount();
 			break;
 		case 4:
+			viewSetRoomTypePrice();
 			break;
 		default:
 			viewIndex();
