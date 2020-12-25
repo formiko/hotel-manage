@@ -5,6 +5,7 @@
 #include "Room.h"
 #include "MemberDiscount.h"
 #include "Customer.h"
+#include "ContinueDiscount.h"
 using namespace std;
 
 ostream &operator << (ostream &out, RoomInfo &obj) {
@@ -21,18 +22,34 @@ istream &operator >> (istream &in, RoomInfo &obj) {
 	return in;
 }
 
+void Room::checkOut(string roomId) {
+	cout << "需要收费金额为 " << Room::mpRoom[roomId].needPay << endl;
+	Room::mpRoom[roomId].roomStatus = "空房";
+	Room::mpRoom[roomId].whoInRoom = "无";
+	Room::mpRoom[roomId].stayPeriod = 0;
+	Room::mpRoom[roomId].needPay = 0;
+	syncWriteRoom();
+}
+
+void Room::inRoom(string roomId) {
+	Room::mpRoom[roomId].roomStatus = "已入住";
+	syncWriteRoom();
+}
+
 void Room::bookRoom(string roomId, string username, int stayPeriod) {
 	Room::mpRoom[roomId].roomStatus = "已预订";
 	Room::mpRoom[roomId].whoInRoom = username;
 	Room::mpRoom[roomId].stayPeriod = stayPeriod;
-//	puts("********************");
-//	cout << RoomTypePrice::mpRoomType[Room::mpRoom[roomId].typeName].pricePerNight << endl;
-//	cout <<	MemberDiscount::mpDiscount[Customer::mpCustomer[username].customerStatus] << endl;
-//	puts("********************");
+	puts("********************");
+	cout << RoomTypePrice::mpRoomType[Room::mpRoom[roomId].typeName].pricePerNight << endl;
+	cout <<	MemberDiscount::mpDiscount[Customer::mpCustomer[username].customerStatus] << endl;
+	cout <<	ContinueDiscount::workDiscount(stayPeriod) << endl;
+	puts("********************");
 
 	Room::mpRoom[roomId].needPay = (double)stayPeriod
 	                               * RoomTypePrice::mpRoomType[Room::mpRoom[roomId].typeName].pricePerNight
-	                               * MemberDiscount::mpDiscount[Customer::mpCustomer[username].customerStatus];
+	                               * MemberDiscount::mpDiscount[Customer::mpCustomer[username].customerStatus]
+	                               * ContinueDiscount::workDiscount(stayPeriod);
 	syncWriteRoom();
 }
 
@@ -92,6 +109,7 @@ void Room::showRoom() {
 		     endl;
 	}
 }
+
 
 
 

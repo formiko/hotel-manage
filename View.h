@@ -5,9 +5,12 @@
 
 class View {
 	public:
+		void viewCheckOut();
+		void viewInRoom();
 		void viewShowAllRoom(string who);
 		void viewSetRoomTypePrice();
-		void viewManageSteadyInDiscount();
+		void viewShowContinueInDiscount();
+		void viewManageContinueInDiscount();
 		void viewSetMemberDiscount();
 		void viewSetDiscount();
 		void viewReceptIndex();

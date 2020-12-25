@@ -27,6 +27,8 @@ class RoomInfo : public RoomTypeInfo {
 class Room {
 		static map<string, RoomInfo> mpRoom;
 	public:
+		static void checkOut(string roomId);
+		static void inRoom(string roomId);
 		static void bookRoom(string roomId, string username, int stayPeriod);
 		static void showCustomerBookedRoom(string username);
 		static void CustomerCancelBook(string username);

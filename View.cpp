@@ -4,6 +4,7 @@
 #include "View.h"
 #include "MemberDiscount.h"
 #include "Room.h"
+#include "ContinueDiscount.h"
 using namespace std;
 
 void View::viewCustomerFindAllEmptyRoom() {
@@ -12,7 +13,7 @@ void View::viewCustomerFindAllEmptyRoom() {
 	puts("0. 取消（默认）");
 	int sel;
 	cin >> sel;
-	switch(sel) {
+	switch (sel) {
 		case 1:
 			viewCustomerBookRoom();
 			break;
@@ -29,7 +30,7 @@ void View::viewCustomerFindRoom() {
 	puts("0. 取消（默认）");
 	int sel;
 	cin >> sel;
-	switch(sel) {
+	switch (sel) {
 		case 1:
 			viewCustomerFindAllEmptyRoom();
 			break;
@@ -160,7 +161,7 @@ void View::viewCustomerBookRoom() {
 	puts("0. 返回顾客首页（默认）");
 	int sel;
 	cin >> sel;
-	switch(sel) {
+	switch (sel) {
 		case 1:
 			viewCustomerCancelBook();
 			break;
@@ -168,6 +169,7 @@ void View::viewCustomerBookRoom() {
 			viewCustomerIndex();
 	}
 }
+
 void View::viewCustomerCancelBook() {
 	puts("以下是你的预订");
 	Room::showCustomerBookedRoom(Identity::nowUsername);
@@ -175,7 +177,7 @@ void View::viewCustomerCancelBook() {
 	puts("0. 返回（默认）");
 	int sel;
 	cin >> sel;
-	switch(sel) {
+	switch (sel) {
 		case 1:
 			Room::CustomerCancelBook(Identity::nowUsername);
 			viewCustomerIndex();
@@ -184,12 +186,14 @@ void View::viewCustomerCancelBook() {
 			viewCustomerIndex();
 	}
 }
+
 void View::viewCustomerIndex() {
 	system("cls");
 	puts("1. 查找客房");
 	puts("2. 预订客房");
 	puts("3. 取消预订");
 	puts("4. 退房后评论");
+	puts("0. 重新选择身份（默认）");
 	int sel;
 	cin >> sel;
 	switch (sel) {
@@ -205,10 +209,10 @@ void View::viewCustomerIndex() {
 		case 4:
 			break;
 		default:
-			puts("无效输入");
-			viewCustomerIndex();
+			viewIndex();
 	}
 }
+
 void View::viewAdminLogin() {
 	string username, password;
 	puts("请输入用户名：");
@@ -235,6 +239,7 @@ void View::viewAdminLogin() {
 
 	}
 }
+
 void View::viewSetMemberDiscount() {
 	MemberDiscount::showDiscount();
 	puts("输入需要修改的会员类型序号");
@@ -246,29 +251,56 @@ void View::viewSetMemberDiscount() {
 	MemberDiscount::setDiscount(index, rate);
 	viewSetDiscount();
 }
-void View::viewManageSteadyInDiscount() {
+
+void View::viewShowContinueInDiscount() {
+	ContinueDiscount::showDiscount();
+	puts("0. 返回上一级（默认）");
+	int sel;
+	cin >> sel;
+	switch(sel) {
+		default:
+			viewManageContinueInDiscount();
+			
+	}
 }
+
+void View::viewManageContinueInDiscount() {
+	puts("1. 显示当前连续入住优惠政策");
+	puts("0. 取消（默认）");
+	int sel;
+	cin >> sel;
+	switch (sel) {
+		case 1:
+			viewShowContinueInDiscount();
+			break;
+		default:
+			viewSetDiscount();
+	}
+}
+
 void View::viewSetDiscount() {
 	puts("1. 设置会员优惠政策");
 	puts("2. 管理连续入住优惠政策");
 	puts("0. 取消（默认）");
 	int sel;
 	cin >> sel;
-	switch(sel) {
+	switch (sel) {
 		case 1:
 			viewSetMemberDiscount();
 			break;
 		case 2:
-			viewManageSteadyInDiscount();
+			viewManageContinueInDiscount();
 			break;
 		default:
 			viewAdminIndex();
 	}
 }
+
 void View::viewSetRoomTypePrice() {
 	RoomTypePrice::showRoomTypePrice();
-	
+
 }
+
 void View::viewAdminIndex() {
 	system("cls");
 	puts("1. 查看客房");
@@ -295,17 +327,19 @@ void View::viewAdminIndex() {
 			viewIndex();
 	}
 }
+
 void View::viewShowAllRoom(string who) {
 	Room::showRoom();
 	puts("0. 查看客房信息（默认）");
 	int sel;
 	cin >> sel;
-	switch(sel) {
+	switch (sel) {
 		case 0:
 		default:
 			viewLookRoom(who);
 	}
 }
+
 void View::viewLookRoom(string who) {
 	puts("1. 查看全部房间信息");
 	puts("2. 查看空房信息");
@@ -316,18 +350,19 @@ void View::viewLookRoom(string who) {
 	puts("0. 取消（默认）");
 	int sel;
 	cin >> sel;
-	switch(sel) {
+	switch (sel) {
 		case 1:
 			viewShowAllRoom(who);
 			break;
 		default:
-			if("admin" == who) {
+			if ("admin" == who) {
 				viewAdminIndex();
-			} else if("recept" == who) {
+			} else if ("recept" == who) {
 				viewReceptIndex();
 			}
 	}
 }
+
 void View::viewReceptLogin() {
 	string username, password;
 	puts("请输入用户名：");
@@ -354,19 +389,62 @@ void View::viewReceptLogin() {
 
 	}
 }
+
+void View::viewInRoom() {
+	puts("请输入顾客预订的房间号");
+	string roomId;
+	cin >> roomId;
+	Room::inRoom(roomId);
+	puts("办理入住成功");
+	puts("1. 查看客房");
+	puts("0. 返回（默认）");
+	int sel;
+	cin >> sel;
+	switch (sel) {
+		case 1:
+			viewLookRoom("recept");
+			break;
+		default:
+			viewReceptIndex();
+	}
+}
+
+void View::viewCheckOut() {
+	puts("请输入要退房的房间号");
+	string roomId;
+	cin >> roomId;
+	Room::checkOut(roomId);
+	puts("退房成功");
+	puts("1. 查看客房");
+	puts("0. 返回（默认）");
+	int sel;
+	cin >> sel;
+	switch (sel) {
+		case 1:
+			viewLookRoom("recept");
+			break;
+		default:
+			viewReceptIndex();
+	}
+}
+
 void View::viewReceptIndex() {
 	puts("1. 查看客房");
 	puts("2. 办理入住");
 	puts("3. 办理退房");
-	puts("4. 办理换房");
+//	puts("4. 办理换房");
 	puts("0. 重新选择身份（默认）");
 	int sel;
 	cin >> sel;
-	switch(sel) {
+	switch (sel) {
 		case 1:
 			viewLookRoom("recept");
 			break;
 		case 2:
+			viewInRoom();
+			break;
+		case 3:
+			viewCheckOut();
 			break;
 		default:
 			viewIndex();

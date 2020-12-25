@@ -3,6 +3,7 @@
 #include "MemberDiscount.h"
 #include "Room.h"
 #include "Customer.h"
+#include "ContinueDiscount.h"
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -10,6 +11,7 @@ map<string, double> MemberDiscount::mpDiscount;
 map<string, RoomTypeInfo> RoomTypePrice::mpRoomType;
 map<string, RoomInfo> Room::mpRoom;
 map<string, CustomerInfo> Customer::mpCustomer;
+map<int, ContinueDiscountInfo>ContinueDiscount::mpContinueDiscount;
 string Identity::nowUsername = "none";
 
 int main() {
@@ -17,7 +19,14 @@ int main() {
 	Room::syncReadRoom();
 	Customer::syncReadCustomer();
 	MemberDiscount::syncReadDiscount();
-
+	ContinueDiscount::syncReadDiscount();
+//	ofstream file;
+//	file.open("continueDiscount.dat", ios::out);
+//	file << "0 1" << endl;
+//	file << "2 0.9" << endl;
+//	file << "5 0.85" << endl;
+//	file << "9 0.8" << endl;
+	
 //	ofstream file;
 //	file.open("Customer.dat", ios::out);
 //	file << "formiko ½ð¿¨»áÔ± ²Ë¹· ÄÐ 12345678123" << endl;
